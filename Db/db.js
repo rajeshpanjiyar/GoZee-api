@@ -13,7 +13,7 @@ const connectDb = () => {
     .then(() => {
       console.log("Database CONNECTED");
     })
-    .catch(() => {
+    .catch((err) => {
       console.log("UNABLE to connect to Database");
     });
 }

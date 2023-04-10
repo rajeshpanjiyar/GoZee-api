@@ -6,6 +6,7 @@ const carSchema = new mongoose.Schema(
     image: { type: String, required: true },
     capacity: { type: Number, required: true },
     fuelType: { type: String, required: true },
+    owner: {type: mongoose.Schema.Types.ObjectId},
     bookedTimeSlots: [
       {
         from: { type: String, required: true },

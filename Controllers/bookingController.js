@@ -60,9 +60,25 @@ exports.bookCar = async (req, res) => {
 };
 
 exports.getAllBookings = async (req, res) => {
+  
   try {
+    const user = req.body.user;
     const bookings = await Booking.find().populate("car").populate("user");
-    res.send(bookings);
+    const result = [];
+    if(user.admin){
+      for(let i = 0; i < bookings.length; i++){
+        if(bookings[i]?.car.owner == user._id){
+          result.push(bookings[i]);
+        }
+      }
+    }else{
+      for(let i = 0; i < bookings.length; i++){
+        if(bookings[i]?.user._id == user._id){
+          result.push(bookings[i]);
+        }
+      }
+    }
+    res.send(result);
   } catch (error) {
     return res.status(400).json(error);
   }

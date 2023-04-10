@@ -1,6 +1,21 @@
 const Car = require("../Models/carModel");
 exports.getAllcars = async (req, res) => {
   try {
+    const user = req.body.user;
+    if (user.admin) {
+      const cars = await Car.find({ owner: user._id });
+      res.send(cars);
+    } else {
+      const cars = await Car.find();
+      res.send(cars);
+    }
+  } catch (error) {
+    return res.status(400).json(error);
+  }
+};
+
+exports.getAllCarsInSearch = async (req, res) => {
+  try {
     const cars = await Car.find();
     res.send(cars);
   } catch (error) {
