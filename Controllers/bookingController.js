@@ -62,18 +62,18 @@ exports.bookCar = async (req, res) => {
 exports.getAllBookings = async (req, res) => {
   
   try {
-    const user = req.body.user;
+    const user = await req.body.user;
     const bookings = await Booking.find().populate("car").populate("user");
     const result = [];
-    if(user.admin){
+    if(user.admin == true){
       for(let i = 0; i < bookings.length; i++){
-        if(bookings[i]?.car.owner == user._id){
+        if(bookings[i]?.car?.owner == user._id){
           result.push(bookings[i]);
         }
       }
     }else{
       for(let i = 0; i < bookings.length; i++){
-        if(bookings[i]?.user._id == user._id){
+        if(bookings[i]?.user?._id == user._id){
           result.push(bookings[i]);
         }
       }
