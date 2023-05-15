@@ -1,10 +1,11 @@
 const Car = require("../Models/carModel");
 const cloudinary = require("cloudinary").v2;
+require('dotenv').config();
 
 cloudinary.config({
-  cloud_name: "dh7awkgnr",
-  api_key: "282356524372663",
-  api_secret: "f3mF1RWqzm3CznOTSPXbBUOw8Gs",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.COULD_API_KEY,
+  api_secret: process.env.COULD_API_SECRET_KEY,
 });
 
 exports.getAllcars = async (req, res) => {
