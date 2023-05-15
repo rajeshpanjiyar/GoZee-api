@@ -1,4 +1,12 @@
 const Car = require("../Models/carModel");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "dh7awkgnr",
+  api_key: "282356524372663",
+  api_secret: "f3mF1RWqzm3CznOTSPXbBUOw8Gs",
+});
+
 exports.getAllcars = async (req, res) => {
   try {
     const user = req.body.user;
@@ -26,9 +34,21 @@ exports.getAllCarsInSearch = async (req, res) => {
 exports.addCar = async (req, res) => {
   try {
     const newcar = new Car(req.body);
-    await newcar.save();
+    newcar.save();
     res.send("Car added successfully");
   } catch (error) {
+    console.log(error);
+    return res.status(400).json(error);
+  }
+};
+
+exports.addCarphoto = async (req, res) => {
+  try {
+    const file = await req.files?.image;
+    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
     return res.status(400).json(error);
   }
 };
