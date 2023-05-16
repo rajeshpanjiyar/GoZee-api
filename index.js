@@ -2,9 +2,10 @@ const express = require("express");
 const app = express();
 const fileUpload = require("express-fileupload");
 const port = process.env.PORT || 4000;
+const path = require("path")
 var cors = require("cors");
-const connectDb = require("./Db/db");
 app.use(cors());
+const connectDb = require("./Db/db");
 app.use(
   fileUpload({
     useTempFiles: true,
