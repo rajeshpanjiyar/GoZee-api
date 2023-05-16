@@ -9,7 +9,7 @@ const connectDb = require("./Db/db");
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: path.join(__dirname, "tmp/"),
+    tempFileDir: path.join(__dirname, "/tmp/"),
     abortOnLimit: true,
     preserveExtension: true,
     safeFileNames: true,
