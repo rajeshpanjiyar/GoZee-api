@@ -46,7 +46,7 @@ exports.addCar = async (req, res) => {
 exports.addCarphoto = async (req, res) => {
   try {
     const file = await req.files?.image;
-    const result = await cloudinary.uploader.upload(file.tempFilePath);
+    const result = await cloudinary.uploader.upload(file?.tempFilePath);
     res.send(result);
   } catch (error) {
     console.log(error);
